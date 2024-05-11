@@ -19,7 +19,7 @@ void push(Stack *s, int item){
 int pop(Stack *s){
     int item;
     if(s->top == 0){
-        printf("Stack is Empty");
+        printf("Stack is empty");
         return -1;
     }
     else{
