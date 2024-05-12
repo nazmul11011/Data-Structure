@@ -49,6 +49,35 @@ Node *append(Node *head, int item){
     return head;
 }
 
+Node *remove_node(Node *head, Node *node){
+    
+    if(node == head){
+        head = node->next;
+
+        free(node);
+
+        return head;
+    }
+
+    Node *current_node = head;
+    while(current_node->next != NULL){
+        if(current_node->next ==node){
+            break;
+        }
+        current_node = current_node->next;
+    }
+
+    if(current_node->next == NULL){
+        return head;
+    }
+
+    current_node->next = current_node->next->next;
+
+    free(node);
+
+    return head;
+}
+
 void print_linked_list(Node *head){
 
     Node *current_node = head;
@@ -63,7 +92,7 @@ void print_linked_list(Node *head){
 
 int main(){
 
-    Node *n1, *head;
+    Node *n1, *head, *n2;
 
     n1 = create_node(10, NULL);
     head = n1;
@@ -76,6 +105,20 @@ int main(){
 
     head = append(head, 30);
     printf("Appended Node: ");
+    print_linked_list(head);
+
+    head = remove_node(head, n1);
+    printf("1st Removed Node: ");
+    print_linked_list(head);
+
+    n2 = head;
+    head = remove_node(head, n2);
+    printf("2nd Removed Node: ");
+    print_linked_list(head);
+
+    n2 = head;
+    head = remove_node(head, n2);
+    printf("3rd Removed Node: ");
     print_linked_list(head);
 
     return 0;
