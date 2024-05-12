@@ -25,13 +25,27 @@ Node *create_node(int item, Node *next){
     return new_node;
 }
 
+Node *prepend(Node *head, int item){
+    Node *new_node = create_node(item, head);
+
+    return new_node;
+}
+
 int main(){
 
-    Node *n;
+    Node *n1, *n2, *head, *n3;
 
-    n = create_node(10, NULL);
+    n1 = create_node(10, NULL);
+    head = n1;
 
-    printf("data - %d\n", n->data);
+    head = prepend(head, 20);
+
+    n2 = head;
+
+    printf("First data = %d\n", n2->data);
+
+    n3 = n2->next;
+    printf("Second data = %d\n", n3->data);
 
     return 0;
 }
