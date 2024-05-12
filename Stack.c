@@ -4,7 +4,7 @@
 typedef struct{
     int top;
     int data[STACK_MAX];
-}Stack;
+} Stack;
 
 void push(Stack *s, int item){
     if(s->top < STACK_MAX){
