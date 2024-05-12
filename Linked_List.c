@@ -78,6 +78,13 @@ Node *remove_node(Node *head, Node *node){
     return head;
 }
 
+void insert(Node *node, int item){
+
+    Node *new_node = create_node(item, node->next);
+
+    node->next = new_node;
+}
+
 void print_linked_list(Node *head){
 
     Node *current_node = head;
@@ -105,6 +112,10 @@ int main(){
 
     head = append(head, 30);
     printf("Appended Node: ");
+    print_linked_list(head);
+
+    insert(head, 40);
+    printf("Inserted Node: ");
     print_linked_list(head);
 
     head = remove_node(head, n1);
