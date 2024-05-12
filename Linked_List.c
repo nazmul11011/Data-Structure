@@ -31,21 +31,52 @@ Node *prepend(Node *head, int item){
     return new_node;
 }
 
+Node *append(Node *head, int item){
+
+    Node *new_node = create_node(item, NULL);
+
+    if(head == NULL){
+        return new_node;
+    }
+
+    Node *current_node = head;
+
+    while(current_node->next != NULL){
+        current_node = current_node->next;
+    }
+
+    current_node->next = new_node;
+    return head;
+}
+
+void print_linked_list(Node *head){
+
+    Node *current_node = head;
+    while (current_node != NULL)
+    {
+        printf("%d ", current_node->data);
+        current_node = current_node->next;
+    }
+    printf("\n");
+    
+}
+
 int main(){
 
-    Node *n1, *n2, *head, *n3;
+    Node *n1, *head;
 
     n1 = create_node(10, NULL);
     head = n1;
+    printf("Created Node: ");
+    print_linked_list(head);
 
     head = prepend(head, 20);
+    printf("Prepended Node: ");
+    print_linked_list(head);
 
-    n2 = head;
-
-    printf("First data = %d\n", n2->data);
-
-    n3 = n2->next;
-    printf("Second data = %d\n", n3->data);
+    head = append(head, 30);
+    printf("Appended Node: ");
+    print_linked_list(head);
 
     return 0;
 }
