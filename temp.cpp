@@ -175,36 +175,91 @@
 // }
 
 
-#include <stdio.h>
-#include <stdlib.h>
+// #include <stdio.h>
+// #include <stdlib.h>
 
-typedef struct Node {
-    int data;
-    struct Node *next;
-} Node;
+// typedef struct Node {
+//     int data;
+//     struct Node *next;
+// } Node;
 
-Node *createNode(int data){
-    Node *newNode=(Node *)malloc(sizeof(Node));
-    newNode->data=data;
-    newNode->next=NULL;
+// Node *createNode(int data){
+//     Node *newNode=(Node *)malloc(sizeof(Node));
+//     newNode->data=data;
+//     newNode->next=NULL;
 
-    return newNode;
+//     return newNode;
+// }
+
+// void printList(Node *head){
+//     Node *temp=head;
+//     while(temp!=NULL){
+//         printf("%d ->",temp->data);
+//         temp=temp->next;
+//     }printf("END\n");
+// }
+
+// int main(){
+//     Node *head=createNode(1);
+//     head->next=createNode(3);
+//     head->next->next=createNode(5);
+//     head->next->next->next=createNode(6);
+
+//     printList(head);
+//     return 0;
+// }
+
+#include <iostream>
+
+struct Node {
+    int value;
+    Node* left_node;
+    Node* right_node;
+
+    Node() : value(0), left_node(nullptr), right_node(nullptr) {}
+};
+
+Node* insert(int num, Node* node) {
+    if (node == NULL) {
+        Node* temp = new Node();
+        temp->value = num;
+        return temp;
+    } 
+    else if (num <= node->value) {
+        node->left_node = insert(num, node->left_node);
+    } 
+    else {
+        node->right_node = insert(num, node->right_node);
+    }
+    return node;
 }
 
-void printList(Node *head){
-    Node *temp=head;
-    while(temp!=NULL){
-        printf("%d ->",temp->data);
-        temp=temp->next;
-    }printf("END\n");
+// Function to print the tree in-order
+void inOrder(Node* node) {
+    if (node != NULL) {
+        inOrder(node->left_node);
+        std::cout << node->value << " ";
+        inOrder(node->right_node);
+    }
 }
 
-int main(){
-    Node *head=createNode(1);
-    head->next=createNode(3);
-    head->next->next=createNode(5);
-    head->next->next->next=createNode(6);
+int main() {
+    Node* root = NULL; // Initialize root
 
-    printList(head);
+    // Insert nodes
+    root = insert(8, root);
+    root = insert(3, root);
+    root = insert(10, root);
+    root = insert(1, root);
+    root = insert(6, root);
+    root = insert(14, root);
+    root = insert(4, root);
+    root = insert(7, root);
+    root = insert(13, root);
+
+    // Print the tree in-order
+    std::cout << "In-order traversal: ";
+    inOrder(root); // Expected output: 1 3 4 6 7 8 10 13 14
+
     return 0;
 }
